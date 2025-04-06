@@ -12,6 +12,7 @@ import frc.robot.Constants.LEDConstants;
 public class CANdleSubsystem extends SubsystemBase {
   private final CANdle candle;
   private final RainbowAnimation rainbowAnimation;
+  private static CANdleSubsystem instance;
 
   public CANdleSubsystem() {
     // Initialize the CANdle with the specified device ID.
@@ -25,6 +26,14 @@ public class CANdleSubsystem extends SubsystemBase {
 
     // Initialize the rainbow animation with full brightness, half speed, and 64 LEDs
     rainbowAnimation = new RainbowAnimation(1.0, 0.5, 64);
+  }
+
+  // Singleton pattern to ensure only one instance of CANdleSubsystem exists.
+  public static CANdleSubsystem getInstance() {
+    if (instance == null) {
+      instance = new CANdleSubsystem();
+    }
+    return instance;
   }
 
   // Starts the rainbow animation
